@@ -28,11 +28,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<File> _photos = [];
   int _bottomNavIndex = 0;
-  ImageSource _currentImageSource = ImageSource.camera;
 
   Future<void> _takePhoto() async {
     final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: _currentImageSource);
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
     if (pickedFile != null) {
       setState(() {
         _photos.add(File(pickedFile.path));
@@ -185,13 +184,6 @@ class _HomePageState extends State<HomePage> {
   void _onItemTapped(int index) {
     setState(() {
       _bottomNavIndex = index;
-    });
-  }
-
-  void _selectPhoto() {
-    setState(() {
-      _currentImageSource = ImageSource.gallery;
-      _takePhoto();
     });
   }
 }
